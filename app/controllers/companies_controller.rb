@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-	expose(:company)
+  expose(:company)
 	expose(:companies)
 	expose(:person)
   
@@ -10,9 +10,9 @@ class CompaniesController < ApplicationController
   end
 
   def favorite
-    @fav_company = current_user.favorite_companies.order('created_at DESC').uniq
-    @fav_people = current_user.favorite_people.order('created_at DESC').uniq
-    @companies_number = current_user.favorite_companies.uniq.length
-    @people_number = current_user.favorite_people.uniq.length
+    @fav_company = current_user.favorite_companies.order('created_at DESC')
+    @fav_people = current_user.favorite_people.order('created_at DESC')
+    @companies_number = current_user.favorite_companies.length
+    @people_number = current_user.favorite_people.length
   end
 end

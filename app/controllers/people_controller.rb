@@ -1,3 +1,2 @@
 class PersonController < ApplicationController
-
 end
