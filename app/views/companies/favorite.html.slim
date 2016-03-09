@@ -1,0 +1,35 @@
+h2 Favorite companies
+- if @fav_company.empty?
+  | You don't have any favorite company.
+- else  
+  table
+    tr
+      th Name
+      th Country
+      th Country Code
+    - @fav_company.each do |company|
+      tr
+        td= company.name
+        td= company.country_name
+        td= company.country_code
+  br
+  | You have #{@companies_number} favorite #{"company".pluralize(@companies_number)}.
+  br
+
+h2 Favorite people
+- if @fav_people.empty?
+  | You don't have any favorite person.
+- else
+  table
+    tr
+      th First Name
+      th Last Name
+    - @fav_people.each do |company|
+      tr
+        td= company.first_name
+        td= company.last_name
+  br
+  | You have #{@people_number} favorite #{"person".pluralize(@people_number)}.
+
+br
+=link_to "Back", root_path

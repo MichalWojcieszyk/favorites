@@ -1,0 +1,15 @@
+h2 Companies
+table
+  tr
+    th Name
+    th Country
+    th Country Code
+    th Add to Favorites
+  - companies.each do |company|
+    tr
+      td= link_to company.name, company
+      td= company.country_name
+      td= company.country_code
+      td= link_to '', favorite_companies_path(company_id: company), method: :post, remote: true, class: 'glyphicon glyphicon-heart'
+
+      
