@@ -1,3 +1,3 @@
 class Person < ActiveRecord::Base
-	belongs_to :company
+  belongs_to :company
 end
