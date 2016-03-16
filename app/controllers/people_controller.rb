@@ -1,2 +1,2 @@
-class PersonController < ApplicationController
+class PeopleController < ApplicationController
 end
