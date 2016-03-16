@@ -17,6 +17,7 @@ gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'countries', :require => 'countries/global'
 gem 'country_select'
+gem 'friendly_id', '~> 5.1.0'
 
 group :development, :test do
   gem 'byebug'

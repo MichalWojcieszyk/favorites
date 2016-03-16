@@ -1,8 +1,10 @@
 class Company < ActiveRecord::Base
   has_many :people
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
 
   def country_name
-    country = ISO3166::Country[country_code]
-    country.translations[I18n.locale.to_s] || country.name
+    country_code = self.country_code
+    ISO3166::Country[country_code]
   end
 end
