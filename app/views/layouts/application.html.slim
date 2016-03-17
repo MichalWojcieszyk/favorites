@@ -8,6 +8,8 @@ html
     = csrf_meta_tags
   body
     -if user_signed_in?
+      = notice
+      br
       | Signed in as 
       br
       = current_user.email

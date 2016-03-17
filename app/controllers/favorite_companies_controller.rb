@@ -1,10 +1,14 @@
 class FavoriteCompaniesController < ApplicationController
-  before_action :set_company, only: [:create]
+  before_action :set_company, only: [:create, :destroy]
 	
   def create
-    if Favorite.where(user: current_user, favorited_id: @company.id, favorited_type: 'Company').count == 0
-      Favorite.create(favorited: @company, user: current_user)
-    end
+    Favorite.create(favorited: @company, user: current_user)
+    flash[:notice] = "Person was added to your favorites"
+  end
+
+  def destroy
+    Favorite.where(favorited_id: @company.id, user_id: current_user.id).first.destroy
+    redirect_to favorites_path, notice: 'Company is no longer in your favorites'
   end
   
   private

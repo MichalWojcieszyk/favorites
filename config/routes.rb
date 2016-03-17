@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   get 'favorites' => 'companies#favorite'
 
-  resources :favorite_companies, only: [:create]
-  resources :favorite_people, only: [:create]
+  resources :favorite_companies, only: [:create, :destroy]
+  resources :favorite_people, only: [:create, :destroy]
 
   root to: "companies#index"
 end

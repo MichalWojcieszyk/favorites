@@ -1,3 +1,4 @@
+
 br
 | You have #{current_user.favorites_count} #{'favorite'.pluralize(current_user.favorites_count)}.
 h2 Favorite companies
@@ -9,11 +10,13 @@ h2 Favorite companies
       th Name
       th Country
       th Country Code
+      th Remove from favorites
     - @fav_company.each do |company|
       tr
         td= company.name
         td= company.country_name
         td= company.country_code
+        td= link_to '', favorite_company_path(company), method: :delete, class: 'glyphicon glyphicon-remove-circle'
   br
   | You have #{@companies_number} favorite #{"company".pluralize(@companies_number)}.
 
@@ -25,10 +28,12 @@ h2 Favorite people
     tr
       th First Name
       th Last Name
-    - @fav_people.each do |company|
+      th Remove from favorites
+    - @fav_people.each do |person|
       tr
-        td= company.first_name
-        td= company.last_name
+        td= person.first_name
+        td= person.last_name
+        td= link_to '', favorite_person_path(person), method: :delete, class: 'glyphicon glyphicon-remove-circle'
   br
   | You have #{@people_number} favorite #{"person".pluralize(@people_number)}.
 br
