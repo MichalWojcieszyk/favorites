@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
   expose(:company)
   expose(:companies)
-  expose(:person)
   
   def index
   end
