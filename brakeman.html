@@ -1,0 +1,1570 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Brakeman Report</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function toggle(context) {
+      var elem = document.getElementById(context);
+
+      if (elem.style.display != "block")
+        elem.style.display = "block";
+      else
+        elem.style.display = "none";
+
+      elem.parentNode.scrollIntoView();
+    }
+
+    $(document).ready(function() {
+      $('table').DataTable({
+        searching: false,
+        paging:    false,
+        info:      false
+      });
+    });
+  </script>
+  <style>
+    /* CSS style used for HTML reports */
+
+body {
+  font-family: sans-serif;
+  color: #161616;
+}
+
+a {
+  color: #161616;
+}
+
+p {
+  font-weight: bold;
+  font-size: 11pt;
+  color: #2D0200;
+ }
+
+ th {
+   background-color: #980905;
+   border-bottom: 5px solid #530200;
+   color: white;
+   font-size: 11pt;
+   padding: 1px 8px 1px 8px;
+ }
+
+ td {
+   border-bottom: 2px solid white;
+   font-family: monospace;
+   padding: 5px 8px 1px 8px;
+ }
+
+ table {
+   background-color: #FCF4D4;
+   border-collapse: collapse;
+ }
+
+ h1 {
+   color: #2D0200;
+   font-size: 14pt;
+ }
+
+ h2 {
+   color: #2D0200;
+   font-size: 12pt;
+ }
+
+ span.high-confidence {
+   font-weight:bold;
+   color: red;
+ }
+
+ span.med-confidence {
+ }
+
+ span.weak-confidence {
+   color:gray;
+ }
+
+ div.warning_message {
+   cursor: pointer;
+ }
+
+ div.warning_message:hover {
+   background-color: white;
+ }
+
+ table caption {
+   background-color: #FFE;
+   padding: 2px;
+ }
+
+ table.context {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   border-left: 1px solid #90e960;
+   color: #212121;
+ }
+
+ tr.context {
+   background-color: white;
+ }
+
+ tr.first {
+   border-top: 1px solid #7ecc54;
+   padding-top: 2px;
+ }
+
+ tr.error {
+  background-color: #f4c1c1 !important
+ }
+
+ tr.near_error {
+  background-color: #f4d4d4 !important
+ }
+
+ tr.alt {
+   background-color: #e8f4d4;
+ }
+
+ td.context {
+   padding: 2px 10px 0px 6px;
+   border-bottom: none;
+ }
+
+ td.context_line {
+   padding: 2px 8px 0px 7px;
+   border-right: 1px solid #b3bda4;
+   border-bottom: none;
+   color: #6e7465;
+ }
+
+ pre.context {
+   margin-bottom: 1px;
+ }
+
+ .user_input {
+   background-color: #fcecab;
+ }
+
+ div.render_path {
+   display: none;
+   background-color: #ffe;
+   padding: 5px;
+   margin: 2px 0px 2px 0px;
+ }
+
+ div.template_name {
+   cursor: pointer;
+ }
+
+ div.template_name:hover {
+   background-color: white;
+ }
+
+  </style>
+</head>
+<body>
+
+<h1>Brakeman Report</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Application Path</th>
+      <th>Rails Version</th>
+      <th>Brakeman Version</th>
+      <th>Report Time</th>
+      <th>Checks Performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/home/michal/ars_vision_before_association/favorites</td>
+      <td>4.2.5.2</td>
+      <td>3.1.5
+      <td>
+        2016-03-18 17:10:09 +0100<br><br>
+        0.779458928 seconds
+      </td>
+      <td>BasicAuth, BasicAuthTimingAttack, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2 id='summary'>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scanned/Reported</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controllers</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Models</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Security Warnings</td>
+      <td>0 <span class='high-confidence'>(0)</span></td>
+    </tr>
+  
+    <tr>
+      <td>Ignored Warnings</td>
+      <td>0</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<h2>Controllers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent</th>
+      <th>Includes</th>
+      <th>Routes</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>ApplicationController</td>
+      <td>ActionController::Base</td>
+      <td></td>
+      <td>[None]</td>
+    </tr>
+  
+    <tr>
+      <td>CompaniesController</td>
+      <td>ApplicationController</td>
+      <td></td>
+      <td>favorite, index, show</td>
+    </tr>
+  
+    <tr>
+      <td>FavoriteCompaniesController</td>
+      <td>ApplicationController</td>
+      <td></td>
+      <td>create, destroy</td>
+    </tr>
+  
+    <tr>
+      <td>FavoritePeopleController</td>
+      <td>ApplicationController</td>
+      <td></td>
+      <td>create, destroy</td>
+    </tr>
+  
+    <tr>
+      <td>PeopleController</td>
+      <td>ApplicationController</td>
+      <td></td>
+      <td>[None]</td>
+    </tr>
+  
+    <tr>
+      <td>Users::OmniauthCallbacksController</td>
+      <td>Devise::OmniauthCallbacksController</td>
+      <td></td>
+      <td>[None]</td>
+    </tr>
+  
+  </tbody>
+</table><h2>Templates</h2>
+
+
+
+<p>companies/favorite</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.favorites_count</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;favorite&quot;.pluralize(current_user.favorites_count)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&lt;h2&gt;Favorite companies&lt;/h2&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;You don&#39;t have any favorite company.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Country&lt;/th&gt;&lt;th&gt;Country Code&lt;/th&gt;&lt;th&gt;Remove from favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_code</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_company_path(company), :method =&gt; :delete, :class =&gt; &quot;glyphicon glyphicon-remove-circle&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] @companies_number</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; favorite &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;company&quot;.pluralize(@companies_number)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h2&gt;Favorite people&lt;/h2&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;You don&#39;t have any favorite person.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;First Name&lt;/th&gt;&lt;th&gt;Last Name&lt;/th&gt;&lt;th&gt;Remove from favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.first_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.last_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_person_path(person), :method =&gt; :delete, :class =&gt; &quot;glyphicon glyphicon-remove-circle&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] @people_number</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; favorite &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;person&quot;.pluralize(@people_number)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Back&quot;, root_path)</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>companies/favorite.["CompaniesController#favorite"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.favorites_count</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;favorite&quot;.pluralize(current_user.favorites_count)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&lt;h2&gt;Favorite companies&lt;/h2&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;You don&#39;t have any favorite company.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Country&lt;/th&gt;&lt;th&gt;Country Code&lt;/th&gt;&lt;th&gt;Remove from favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_code</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_company_path(company), :method =&gt; :delete, :class =&gt; &quot;glyphicon glyphicon-remove-circle&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.favorite_companies.length</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; favorite &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;company&quot;.pluralize(current_user.favorite_companies.length)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h2&gt;Favorite people&lt;/h2&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;You don&#39;t have any favorite person.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;First Name&lt;/th&gt;&lt;th&gt;Last Name&lt;/th&gt;&lt;th&gt;Remove from favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.first_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.last_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_person_path(person), :method =&gt; :delete, :class =&gt; &quot;glyphicon glyphicon-remove-circle&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&lt;br /&gt;You have &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.favorite_people.length</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot; favorite &quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] &quot;person&quot;.pluralize(current_user.favorite_people.length)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Back&quot;, root_path)</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>companies/index</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h2&gt;Companies&lt;/h2&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Country&lt;/th&gt;&lt;th&gt;Country Code&lt;/th&gt;&lt;th&gt;Add to Favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(company.name, company)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_code</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_companies_path(:company_id =&gt; company), :method =&gt; :post, :remote =&gt; true, :class =&gt; &quot;glyphicon glyphicon-heart&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>companies/index.["CompaniesController#index"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h2&gt;Companies&lt;/h2&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Country&lt;/th&gt;&lt;th&gt;Country Code&lt;/th&gt;&lt;th&gt;Add to Favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(company.name, company)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.country_code</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_companies_path(:company_id =&gt; company), :method =&gt; :post, :remote =&gt; true, :class =&gt; &quot;glyphicon glyphicon-heart&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>companies/show</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h1&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/h1&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;No people in this company.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;First Name&lt;/th&gt;&lt;th&gt;Last Name&lt;/th&gt;&lt;th&gt;Add to Favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.first_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.last_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_people_path(:person_id =&gt; person), :method =&gt; :post, :remote =&gt; true, :class =&gt; &quot;glyphicon glyphicon-heart&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Back&quot;, root_path)</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>companies/show.["CompaniesController#show"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;h1&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] company.name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/h1&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;No people in this company.&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;table&gt;&lt;tr&gt;&lt;th&gt;First Name&lt;/th&gt;&lt;th&gt;Last Name&lt;/th&gt;&lt;th&gt;Add to Favorites&lt;/th&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;tr&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.first_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] person.last_name</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;td&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;&quot;, favorite_people_path(:person_id =&gt; person), :method =&gt; :post, :remote =&gt; true, :class =&gt; &quot;glyphicon glyphicon-heart&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/td&gt;&lt;/tr&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/table&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Back&quot;, root_path)</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/confirmations/new</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true, :value =&gt; (if resource.pending_reconfirmation? then; resource.unconfirmed_email;else; resource.email;end))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Resend confirmation instructions&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; confirmation_path(resource_name), :html =&gt; ({ :method =&gt; :post })) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true, :value =&gt; (if resource.pending_reconfirmation? then; resource.unconfirmed_email;else; resource.email;end));[Escaped Output] f.submit(&quot;Resend confirmation instructions&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/mailer/confirmation_instructions</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] @email</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Confirm my account&quot;, confirmation_url(@resource, :confirmation_token =&gt; (@token)))</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/mailer/password_change</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] @resource.email</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/mailer/reset_password_instructions</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] @resource.email</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Change my password&quot;, edit_password_url(@resource, :reset_password_token =&gt; (@token)))</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/mailer/unlock_instructions</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] @resource.email</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Unlock my account&quot;, unlock_url(@resource, :unlock_token =&gt; (@token)))</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/passwords/edit</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.hidden_field(:reset_password_token)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password, &quot;New password&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] @minimum_password_length</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password, :autofocus =&gt; true, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password_confirmation, &quot;Confirm new password&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Change my password&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; password_path(resource_name), :html =&gt; ({ :method =&gt; :put })) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.hidden_field(:reset_password_token);[Escaped Output] f.label(:password, &quot;New password&quot;);[Escaped Output] @minimum_password_length if @minimum_password_length;[Escaped Output] f.password_field(:password, :autofocus =&gt; true, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.label(:password_confirmation, &quot;Confirm new password&quot;);[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.submit(&quot;Change my password&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/passwords/new</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Send me reset password instructions&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; password_path(resource_name), :html =&gt; ({ :method =&gt; :post })) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true);[Escaped Output] f.submit(&quot;Send me reset password instructions&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/registrations/edit</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] resource_name.to_s.humanize</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] resource.unconfirmed_email</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password_confirmation)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:current_password)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:current_password, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Update&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; registration_path(resource_name), :html =&gt; ({ :method =&gt; :put })) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true);if devise_mapping.confirmable? and resource.pending_reconfirmation? then; [Escaped Output] resource.unconfirmed_email;end;[Escaped Output] f.label(:password);[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.label(:password_confirmation);[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.label(:current_password);[Escaped Output] f.password_field(:current_password, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.submit(&quot;Update&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] button_to(&quot;Cancel my account&quot;, registration_path(resource_name), :data =&gt; ({ :confirm =&gt; &quot;Are you sure?&quot; }), :method =&gt; :delete)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Back&quot;, :back)</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/registrations/new</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] @minimum_password_length</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password_confirmation)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Sign up&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; registration_path(resource_name)) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true);[Escaped Output] f.label(:password);[Escaped Output] @minimum_password_length if @minimum_password_length;[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.label(:password_confirmation);[Escaped Output] f.password_field(:password_confirmation, :autocomplete =&gt; &quot;off&quot;);[Escaped Output] f.submit(&quot;Sign up&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/sessions/new</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:password)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.check_box(:remember_me)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:remember_me)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Log in&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; session_path(resource_name)) do; [Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true);[Escaped Output] f.label(:password);[Escaped Output] f.password_field(:password, :autocomplete =&gt; &quot;off&quot;);if devise_mapping.rememberable? then; [Escaped Output] f.check_box(:remember_me); [Escaped Output] f.label(:remember_me);end;[Escaped Output] f.submit(&quot;Log in&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/shared/_links</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Log in&quot;, new_session_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Sign up&quot;, new_registration_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Forgot your password?&quot;, new_password_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Didn&#39;t receive confirmation instructions?&quot;, new_confirmation_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Didn&#39;t receive unlock instructions?&quot;, new_unlock_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Sign in with #{OmniAuth::Utils.camelize(provider)}&quot;, omniauth_authorize_path(resource_name, provider))</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/shared/_links.["Template:devise/confirmations/new"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Log in&quot;, new_session_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Sign up&quot;, new_registration_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Forgot your password?&quot;, new_password_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Didn&#39;t receive confirmation instructions?&quot;, new_confirmation_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Didn&#39;t receive unlock instructions?&quot;, new_unlock_path(resource_name))</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Sign in with #{OmniAuth::Utils.camelize(provider)}&quot;, omniauth_authorize_path(resource_name, provider))</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>devise/unlocks/new</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Escaped Output] devise_error_messages!</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.label(:email)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.email_field(:email, :autofocus =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] f.submit(&quot;Resend unlock instructions&quot;)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] form_for(resource, :as =&gt; resource_name, :url =&gt; unlock_path(resource_name), :html =&gt; ({ :method =&gt; :post })) do; [Escaped Output] devise_error_messages!;[Escaped Output] f.label(:email);[Escaped Output] f.email_field(:email, :autofocus =&gt; true);[Escaped Output] f.submit(&quot;Resend unlock instructions&quot;); end</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] render(partial =&gt; &quot;devise/shared/links&quot;, {})</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>favorite_companies/create</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;create class=\&quot;html slim\&quot;&gt;&lt;/create&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>favorite_companies/create.["FavoriteCompaniesController#create"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;create class=\&quot;html slim\&quot;&gt;&lt;/create&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>layouts/application</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Favorites&lt;/title&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] stylesheet_link_tag(&quot;application&quot;, :media =&gt; &quot;all&quot;, &quot;data-turbolinks-track&quot; =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] javascript_include_tag(&quot;application&quot;, &quot;data-turbolinks-track&quot; =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] csrf_meta_tags</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/head&gt;&lt;body&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] notice</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;Signed in as &lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.email</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Favorites&quot;, favorites_path)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Logout&quot;, destroy_user_session_path, :method =&gt; :delete)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] yield</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/body&gt;&lt;/html&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+
+
+<p>layouts/application.["CompaniesController#index"]</p>
+<table>
+  <thead>
+    <tr>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[Output] &quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Favorites&lt;/title&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] stylesheet_link_tag(&quot;application&quot;, :media =&gt; &quot;all&quot;, &quot;data-turbolinks-track&quot; =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] javascript_include_tag(&quot;application&quot;, &quot;data-turbolinks-track&quot; =&gt; true)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] csrf_meta_tags</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/head&gt;&lt;body&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] notice</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;Signed in as &lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] current_user.email</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Favorites&quot;, favorites_path)</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;br /&gt;&quot;.freeze</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] link_to(&quot;Logout&quot;, destroy_user_session_path, :method =&gt; :delete)</td>
+    </tr>
+  
+    <tr>
+      <td>[Escaped Output] yield</td>
+    </tr>
+  
+    <tr>
+      <td>[Output] &quot;&lt;/body&gt;&lt;/html&gt;&quot;.freeze</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+</body></html>

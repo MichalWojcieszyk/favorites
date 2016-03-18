@@ -15,11 +15,11 @@ gem 'decent_exposure'
 gem 'turbolinks'
 gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'countries', :require => 'countries/global'
+gem 'countries', require: 'countries/global'
 gem 'country_select'
 gem 'friendly_id', '~> 5.1.0'
 gem 'omniauth-facebook'
-
+gem 'rubocop', require: false
 
 group :development, :test do
   gem 'byebug'
@@ -32,6 +32,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'better_errors'
+  gem 'brakeman'
 end
 
 group :test do
@@ -39,5 +40,3 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
 end
-
-

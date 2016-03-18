@@ -16,6 +16,6 @@ html
       br
       = link_to "Favorites", favorites_path
       br
-      = link_to 'Logout', destroy_user_session_path, :method => :delete
+      = link_to 'Logout', destroy_user_session_path, method: :delete
 
     = yield
