@@ -15,4 +15,6 @@ h1
         td= person.last_name
         td= link_to '', favorite_people_path(person_id: person), method: :post, remote: true, class: "glyphicon glyphicon-heart"
 br
+|  This company has #{company.people_count} #{'employee'.pluralize(company.people_count)}.
+br
 =link_to "Back", root_path
