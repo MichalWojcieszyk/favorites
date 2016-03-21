@@ -1,0 +1,11 @@
+.container
+  .jumbotron
+    h1 Advanced Search
+    = simple_form_for @search do |s|
+      = s.input :keywords
+      = s.input :country_code, label: 'Country'
+      = s.input :min_people, label: 'Minumum number of people in company', collection: 2..10, selected: 2
+      = s.input :max_people, label: 'Maximum number of people in company', collection: 2..10, selected: 10
+      = s.button :submit, class: 'btn btn-info'
+    br
+    = link_to "Back", root_path, class: 'btn btn-warning btn-sm'

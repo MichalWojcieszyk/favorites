@@ -21,6 +21,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'omniauth-facebook'
 gem 'rubocop', require: false
 gem 'counter_culture', '~> 0.1.33'
+gem 'simple_form'
+gem 'active_link_to'
 
 group :development, :test do
   gem 'byebug'

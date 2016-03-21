@@ -1,0 +1,21 @@
+h1 Search results
+
+-if @search.search_companies.empty?
+  | No records found.
+-else
+  table
+    tr
+      th Name
+      th Country
+      th Country Code
+      th People in company
+      th Add to favorites
+    - @search.search_companies.each do |company|
+      tr
+        td= link_to company.name, company
+        td= company.country_name
+        td= company.country_code
+        td= company.people_count
+        td= link_to '', favorite_companies_path(company_id: company), method: :post, remote: true, class: 'glyphicon glyphicon-heart'
+br
+=link_to "Back", new_search_path
