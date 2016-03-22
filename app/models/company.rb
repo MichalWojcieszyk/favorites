@@ -1,5 +1,7 @@
 class Company < ActiveRecord::Base
   has_many :people
+  has_many :company_comments, dependent: :destroy
+
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
 

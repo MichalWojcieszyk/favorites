@@ -6,15 +6,17 @@ h2 Companies
 
 = link_to "Advanced Search", new_search_path, class: 'btn btn-warning'
 br
-table
+table.table-striped
   tr
     th Name
     th Country
     th Country Code
     th Add to Favorites
+    th Add Comment
   - @companies.each do |company|
     tr
       td= link_to company.name, company
       td= company.country_name
       td= company.country_code
       td= link_to '', favorite_companies_path(company_id: company), method: :post, remote: true, class: 'glyphicon glyphicon-heart'
+      td= link_to 'Add comment', new_company_company_comment_path(company_id: company), class: 'btn btn-primary btn-sm'

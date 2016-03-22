@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   
-  resources :companies, only: [:index, :show, :favorite]
+  resources :companies, only: [:index, :show, :favorite] do
+  	resources :company_comments
+  end
   resources :searches
 
   get 'favorites', to: 'companies#favorite'

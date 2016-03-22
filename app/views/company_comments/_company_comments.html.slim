@@ -1,0 +1,16 @@
+h2 Company comments
+= link_to 'Add comment', new_company_company_comment_path(company_id: company), class: 'btn btn-primary'
+br
+- if company.company_comments.empty?
+  | This company hasn't got any comments.
+- else
+  .panel.panel-default
+    .panel-body
+      - company.company_comments.each do |com|
+        b Title: 
+        = com.title
+        br
+        b Body: 
+        = com.body
+        br
+        br

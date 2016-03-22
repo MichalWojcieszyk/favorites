@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321121934) do
+ActiveRecord::Schema.define(version: 20160321150219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20160321121934) do
     t.integer "company_id"
     t.integer "user_id"
   end
+
+  create_table "company_comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "company_id"
+  end
+
+  add_index "company_comments", ["company_id"], name: "index_company_comments_on_company_id", using: :btree
+  add_index "company_comments", ["user_id"], name: "index_company_comments_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -101,6 +113,8 @@ ActiveRecord::Schema.define(version: 20160321121934) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "company_comments", "companies"
+  add_foreign_key "company_comments", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "people", "companies"
 end

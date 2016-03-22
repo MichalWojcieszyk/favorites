@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   expose(:company)
-  #expose(:companies)
+  expose(:company_comment)
   
   def index
     @companies = Company.search(params[:search])

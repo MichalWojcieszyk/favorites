@@ -13,8 +13,12 @@ h1
       tr
         td= person.first_name
         td= person.last_name
-        td= link_to '', favorite_people_path(person_id: person), method: :post, remote: true, class: "glyphicon glyphicon-heart"
+        td= link_to '', favorite_people_path(person_id: person), method: :post, remote: true, class: 'glyphicon glyphicon-heart'
+        
 br
 |  This company has #{company.people_count} #{'employee'.pluralize(company.people_count)}.
+br
+
+=render 'company_comments/company_comments'
 br
 =link_to "Back", root_path
