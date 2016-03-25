@@ -18,10 +18,4 @@ class Ability
       end
     end
   end
-
-  private
-
-  def admin
-    current_user.try(:admin?)
-  end
 end
