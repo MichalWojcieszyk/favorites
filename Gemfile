@@ -23,6 +23,7 @@ gem 'rubocop', require: false
 gem 'counter_culture', '~> 0.1.33'
 gem 'simple_form'
 gem 'active_link_to'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'byebug'

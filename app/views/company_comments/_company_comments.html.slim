@@ -6,11 +6,13 @@ br
 - else
   .panel.panel-default
     .panel-body
-      - company.company_comments.each do |com|
-        b Title: 
-        = com.title
+      - company.company_comments.each do |comment|
+        | Title: 
+        = comment.title
         br
-        b Body: 
-        = com.body
+        | Body: 
+        = comment.body
         br
+        - if can? :destroy, comment
+          = link_to 'Destroy', company_company_comment_path(company, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
         br
