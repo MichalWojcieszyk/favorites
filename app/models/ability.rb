@@ -2,8 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
-    if user.admin?
+    
+    if user.try(:admin?)
       can :manage, :all
     else
       can :create, CompanyComment
@@ -17,5 +17,11 @@ class Ability
         favorite.user == user
       end
     end
+  end
+
+  private
+
+  def admin
+    current_user.try(:admin?)
   end
 end

@@ -14,8 +14,11 @@ html
       br
       = current_user.email
       br
-      = link_to "Favorites", favorites_path
+      = link_to "Favorites", favorites_path, class: 'btn btn-warning btn-sm'
       br
-      = link_to 'Logout', destroy_user_session_path, method: :delete
+      = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-sm'
+      br
+      - if current_user.admin?
+        = link_to 'Admin panel', rails_admin_path, class: 'btn btn-danger btn-sm'
 
     = yield

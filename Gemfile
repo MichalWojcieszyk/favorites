@@ -24,6 +24,7 @@ gem 'counter_culture', '~> 0.1.33'
 gem 'simple_form'
 gem 'active_link_to'
 gem 'cancancan', '~> 1.10'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'byebug'
