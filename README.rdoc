@@ -1,3 +1,0 @@
-== README
-
-App with "add to favorites" feature and integration tests.
