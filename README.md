@@ -1,4 +1,4 @@
-== README
+# Favorites app
 
 Rails app with favorites system. After signup user can add companies or people to his favorites and check list of its. 
 
